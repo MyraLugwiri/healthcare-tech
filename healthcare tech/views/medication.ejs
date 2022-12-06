@@ -1,0 +1,99 @@
+<!-- Page that displays a form where the website's admin can be able to add more medication to the list -->
+<!-- Page Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Medication</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <!-- <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+<!-- The form -->
+<%= include ("./partials/messages"); %>
+  <form action="/admin/medication" method="POST">
+    <div class="form-group">
+      <label for="generic_name">Generic Name</label>
+      <input 
+      type="generic_name" 
+      class="form-control" 
+      id="generic_name" 
+      placeholder="Paracetamol" 
+      value="<%= typeof generic_name != 'undefined' ? generic_name : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="dosage_forms">Dosage Forms</label>
+      <input 
+      type="dosage_forms" 
+      class="form-control" 
+      id="dosage_forms" 
+      placeholder="oral powder" 
+      value="<%= typeof dosage_forms != 'undefined' ? dosage_forms : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="brand_names">Brand Names</label>
+      <input 
+      type="brand_names" 
+      class="form-control" 
+      id="brand_names" 
+      placeholder="Zegerid (Original Formulation)" 
+      value="<%= typeof brand_names != 'undefined' ? brand_names : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="drug_class">Drug Class</label>
+      <input 
+      type="drug_class" 
+      class="form-control" 
+      id="drug_clas" 
+      placeholder="Proton pump inhibitors" 
+      value="<%= typeof drug_class != 'undefined' ? drug_class : '' %>">
+    </div>
+    <!-- <div class="form-group">
+      <label for="exampleFormControlSelect1">Example select</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div> -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">
+      Submit
+    </button>
+  </form>
