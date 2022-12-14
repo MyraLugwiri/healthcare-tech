@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive hospital website design </title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="/css/style2.css">
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyBYQ2YdqRYx4B3QXegj2H8xERWnXsXGGRg" 
+          type="text/javascript"></script>
+
+</head>
+<body>
+    
+<!-- header  -->
+
+<header class="header">
+
+    <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> Health care Tech. </a>
+
+    <nav class="navbar">
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+    </nav>
+
+    <div id="menu-btn" class="fas fa-bars"></div>
+
+</header>
+<section class="home" id="home">
+
+    <div class="image">
+        
+        <div id="map" style="width: 500px; height: 400px;"></div>
+
+        <script type="text/javascript">
+          var locations = [
+            ['Kipharma', -1.9705786, 30.1044288],
+        
+          ];
+          
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: new google.maps.LatLng(-1.9705786, 30.1044288),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          });
+          
+          var infowindow = new google.maps.InfoWindow();
+      
+          var marker, i;
+          
+          for (i = 0; i < locations.length; i++) {  
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+              map: map
+            });
+            
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+              return function() {
+                infowindow.setContent(locations[i][0]);
+                infowindow.open(map, marker);
+              }
+            })(marker, i));
+          }
+        </script>
+    </div>
+
+    <div class="content">
+        <h3>Kipharma Pharmacy</h3>
+        <p> Address: <span>KN 74 Street, Nyarugenge</span></p>
+        <p> Contact: <span>+250 252 572944</span></p>
+        <p> Email: <span>kipharma@gmail.com</span></p>
+         <a href="/patient/searchmeds"><span class="btn">Go Back!</span></a>
+      
+    </div>
+
+</section>
+
+<!-- Footer -->
+
+<section class="footer">
+
+    <div class="credit"> Developed by <span>Healthcare Tech </span> Technologies </div>
+
+    <div class="box-container">
+        
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +250782233465 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> noone@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> someone@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Kigali, Rwanda </a>
+        </div>
+
+        <div class="box">
+            <h3>follow us</h3>
+            <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+            <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+        </div>
+
+    </div>
+    
+    <div class="credit"> <span>Healthcare Tech</span> | all rights reserved </div>
+</section>
+</body>
+</html>

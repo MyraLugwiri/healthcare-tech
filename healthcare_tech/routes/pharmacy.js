@@ -11,7 +11,7 @@ const user = require("../models/Users")
 // Authentication 
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 
-// Display the list of pharmacy medication 
+// Display the list of pharmacy medication (Create a dashboard for pharmacy)
 router.get("/pharmacy_medication", (req, res) => {
     pharmacy_medication.find((err, docs) => {
         if(!err){

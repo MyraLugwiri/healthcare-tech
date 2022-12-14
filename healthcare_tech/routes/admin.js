@@ -15,7 +15,7 @@ const insurance = require("../models/insurances")
 //router.get('/', forwardAuthenticated, (req, res) => res.render('admin'));
 
 // display medication changes page (CREATE THE MEDICATION PAGE AS AN VIEW IN EJS)
-router.get('/medication', forwardAuthenticated, (req, res) => res.render('medication'));
+router.get('/medication', forwardAuthenticated, (req, res) => res.render('savemedication'));
 
 // Display the insurance page 
 router.get('/insurance', forwardAuthenticated, (req, res) => res.render('insurance'));
@@ -24,11 +24,10 @@ router.get('/insurance', forwardAuthenticated, (req, res) => res.render('insuran
 router.post('/medication', (req, res) => {
     const { generic_name, dosage_forms, brand_names, drug_class, description } = req.body;
     let errors = [];
-    console.log(req.body)
+    console.log(generic_name, dosage_forms, brand_names, drug_class, description)
     if(!generic_name || !dosage_forms || !brand_names || !drug_class || !description ){
         errors.push({ msg: 'Please enter all fields'})
     }
-
     if(errors.length > 0){
         res.render('medication', {
             errors,
@@ -39,6 +38,7 @@ router.post('/medication', (req, res) => {
             description
         });
     } else {
+        console.log(errors)
         drugs.findOne({ generic_name: generic_name }).then(drug =>{
             if(drug) {
                 errors.push({ msg: 'medication already exists'});
@@ -58,6 +58,7 @@ router.post('/medication', (req, res) => {
                     drug_class,
                     description
                 });
+                console.log(newDrug)
                 newDrug.save()
                 .then(drug => {
                     req.flash(
@@ -75,7 +76,9 @@ router.post('/medication', (req, res) => {
 // Display list of all medication on the admin dashboard
 router.get('/', forwardAuthenticated, (req, res) =>{
     drugs.find()
-    .then(data => res.json(data))
+    .then(data => res.render('medication', {
+        data:data
+    }))
     .catch(error => res.json(error))
 })
 

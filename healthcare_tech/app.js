@@ -5,6 +5,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 const unirest = require("unirest");
+const path = require('path')
 
 const app = express();
 app.use(express.json()) 
@@ -61,6 +62,7 @@ app.use('/users', require('./routes/users.js'));
 app.use('/admin', require('./routes/admin'));
 app.use('/pharmacy', require('./routes/pharmacy'));
 app.use('/patient', require('./routes/patients'));
+app.use(express.static(path.join(__dirname, 'asset')))
 
 const PORT = process.env.PORT || 3000;
 

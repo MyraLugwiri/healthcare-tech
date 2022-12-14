@@ -4,17 +4,10 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const unirest = require("unirest");
 const axios = require('axios');
 const User = require('../models/Users');
-// Welcome Page
+// Welcome Page(should contain a search bar, button for registering and login)
 router.get('/', (req, res) => res.render('welcome'));
 
-// getting Patient's current location
-// axios.get('http://ipwhois.app/json/')
-//   .then(({ data }) => {
-        // const latitude = data.latitude
-  //     const longitude = data.longitude
-// }
-
-// Dashboard
+// Dashboard (Accessible to pharmacy and hospitals)
 router.get('/dashboard', ensureAuthenticated, (req, res) =>
   res.render('dashboard', {
     user: req.user

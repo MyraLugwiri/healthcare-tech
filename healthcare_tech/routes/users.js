@@ -7,19 +7,18 @@ const axios = require('axios');
 const User = require('../models/Users');
 const { forwardAuthenticated } = require('../config/auth');
 
-// Login Page
+// Login Page (Will be a button on the welcome page)
 router.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
 
-// Register Page
+// Register Page (Will be a button on the welcome page)
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
 // Register
-router.post('/register', (req, res) => {
+router.post('/registration', (req, res) => {
 
 
   const { name, email, role, password, password2 } = req.body;
   let errors = [];
-  
   if (!name || !email || !role || !password || !password2) {
     errors.push({ msg: 'Please enter all fields' });
   }
@@ -28,9 +27,9 @@ router.post('/register', (req, res) => {
     errors.push({ msg: 'Passwords do not match' });
   }
 
-  if (password.length < 6) {
-    errors.push({ msg: 'Password must be at least 6 characters' });
-  }
+  // if (password.length < 6) {
+  //   errors.push({ msg: 'Password must be at least 6 characters' });
+  // }
 
   if (errors.length > 0) {
     res.render('register', {
@@ -58,7 +57,7 @@ router.post('/register', (req, res) => {
           role,
           password,
         });
-
+        console.log(newUser)
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
@@ -83,19 +82,27 @@ router.post('/register', (req, res) => {
 // Add medication to the 
 
 // Login
-router.post('/login', (req, res, next) => {
+router.post('/logon', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/users/login',
+    successRedirect: '/patient/search',
+    failureRedirect: '/users/registration',
     failureFlash: true
   })(req, res, next);
 });
 
 // Logout
 router.get('/logout', (req, res) => {
-  req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
+  req.logout(req.user, error => {
+    if(error){
+      res.flash('error_msg', 'You cannot logout')
+      
+    }
+    req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/login'); // would be ideal to send users to welcome page
+    
+  });
+ 
+  
 });
 
 
